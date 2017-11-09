@@ -97,10 +97,10 @@ public class Main {
 					String name = String.valueOf(jsonObject.get("name"));
 					String info = String.valueOf(jsonObject.get("info"));
 
-					JSONObject curso = (JSONObject) jsonObject.get("curso");
-					String detalhesCurso = String.valueOf(curso.get("codigo")) + " - " + String.valueOf(curso.get("descricao"));
+					JSONObject course = (JSONObject) jsonObject.get("course");
+					String courseDetail = String.valueOf(course.get("code")) + " - " + String.valueOf(course.get("description"));
 
-					return userid + " ; " + name + " ; " + info + " ; " + detalhesCurso;
+					return userid + " ; " + name + " ; " + info + " ; " + courseDetail;
 				}
 			});
 
