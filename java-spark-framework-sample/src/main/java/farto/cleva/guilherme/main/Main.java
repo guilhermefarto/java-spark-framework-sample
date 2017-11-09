@@ -2,6 +2,8 @@ package farto.cleva.guilherme.main;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -80,6 +82,25 @@ public class Main {
 				@Override
 				public Object handle(Request request, Response response) throws Exception {
 					return "Number of splat parameters: " + request.splat().length + " - " + Arrays.toString(request.splat());
+				}
+			});
+
+			Spark.post("/user/:userid", new Route() {
+
+				@Override
+				public Object handle(Request request, Response response) throws Exception {
+					String userid = request.params(":userid");
+
+					// JSONArray jsonArray = (JSONArray) new JSONParser().parse(request.body());
+					JSONObject jsonObject = (JSONObject) new JSONParser().parse(request.body());
+
+					String name = String.valueOf(jsonObject.get("name"));
+					String info = String.valueOf(jsonObject.get("info"));
+
+					JSONObject curso = (JSONObject) jsonObject.get("curso");
+					String detalhesCurso = String.valueOf(curso.get("codigo")) + " - " + String.valueOf(curso.get("descricao"));
+
+					return userid + " ; " + name + " ; " + info + " ; " + detalhesCurso;
 				}
 			});
 
